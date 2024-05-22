@@ -1,7 +1,6 @@
-
 public class Pilha<Info> {
     private No<Info> topo;
-    private int tamanho;
+
     //construtor padrão
     public boolean estaVazia () {
         return topo == null;
@@ -11,13 +10,11 @@ public class Pilha<Info> {
         if (!estaVazia())
             novo.setProximo(topo);
         topo = novo;
-        tamanho++;
     }
     public Info pop () {
         if (estaVazia()) return null;
         Info info = topo.getInfo();
         topo = topo.getProximo();
-        tamanho--;
         return info;
     }
     public Info consultaTopo () {
@@ -35,17 +32,5 @@ public class Pilha<Info> {
             aux = aux.getProximo();
         }
         return s;
-    }
-    // public int tamanho () {
-    //     No<Info> no = topo;
-    //     int cont = 0;
-    //     while (no != null) {
-    //         cont++;
-    //         no = no.getProximo();
-    //     }
-    //     return cont;
-    // }
-    public int getTamanho() {
-        return tamanho;
     }
 }
