@@ -1,5 +1,6 @@
 public class Pilha<Info> {
     private No<Info> topo;
+    private int tamanho = 0;
 
     //construtor padrão
     public boolean estaVazia () {
@@ -10,17 +11,23 @@ public class Pilha<Info> {
         if (!estaVazia())
             novo.setProximo(topo);
         topo = novo;
+        tamanho++;
     }
     public Info pop () {
         if (estaVazia()) return null;
         Info info = topo.getInfo();
         topo = topo.getProximo();
+        tamanho--;
         return info;
     }
     public Info consultaTopo () {
         if (estaVazia()) return null;
         return topo.getInfo();
     }
+    public int getTamanho(){
+        return tamanho;
+    }
+
     @Override
     public String toString() {
         if (estaVazia())

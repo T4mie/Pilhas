@@ -1,41 +1,48 @@
-import java.util.Date;
+import java.time.Duration;
+import java.time.LocalTime;
 
 public class SubCarro extends Carro {
 
-    private Date entrada;
-    private Date saida;
+    private LocalTime entrada;
+    private LocalTime saida;
     private int manobras;
 
-    public SubCarro(int carro, String placa) {
+    public SubCarro(int carro, String placa, LocalTime entrada, LocalTime saida) {
         super(carro, placa);
         this.entrada = entrada;
         this.saida = saida;
-        this.manobras = manobras;
+        this.manobras = 0;
     }
 
-    public Date getEntrada() {
+    public LocalTime getEntrada() {
         return entrada;
     }
 
-    public void setEntrada(Date entrada) {
+    public void setEntrada(LocalTime entrada) {
         this.entrada = entrada;
     }
 
-    public Date getSaida() {
+    public LocalTime getSaida() {
         return saida;
     }
 
-    public void setSaida(Date saida) {
-        this.saida = saida;
+    public void setSaida(LocalTime saida) {
+        this.saida = LocalTime.now();
+    }
+
+    public long tempoEstacionado(){
+        if (saida != null){
+            Duration duracao = Duration.between(saida, entrada);
+            return duracao.toMillis();
+        }
+        return 0;
     }
 
     public int getManobras() {
         return manobras;
     }
 
-    public void setManobras(int manobras) {
-        this.manobras = manobras;
+    public void adicionaMan(){
+        this.manobras++;
     }
-    
-    
 }
