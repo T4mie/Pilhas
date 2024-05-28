@@ -1,17 +1,17 @@
 public class Carro {
-    private int carro;
+    private int id;
     private String placa;
 
-    public Carro (int carro, String placa) {
-        this.carro = carro;
+    public Carro (int id, String placa) {
+        this.id = id;
         this.placa = placa;
     }
     
     public int getCarro() {
-        return carro;
+        return id;
     }
     public void setCarro(int carro) {
-        this.carro = carro;
+        this.id = carro;
     }
     public String getPlaca() {
         return placa;
@@ -22,6 +22,6 @@ public class Carro {
 
     @Override
     public String toString() {
-        return "carro: "+carro + "| placa: "+placa;
+        return "carro: "+id + "| placa: "+placa;
     }
 }

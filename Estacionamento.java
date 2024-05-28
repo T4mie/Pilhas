@@ -1,6 +1,3 @@
-import java.time.Duration;
-import java.time.LocalTime;
-
 public class Estacionamento{
     private Pilha<SubCarro> pilha;
     private int capacidade;
@@ -12,7 +9,6 @@ public class Estacionamento{
 
     public boolean estacionaCarro(SubCarro carro){
         if(pilha.getTamanho()>=capacidade){
-            System.out.println("Estacionamento cheio, seu abobrinha");
             return false;
         }
         pilha.push(carro);
@@ -20,42 +16,31 @@ public class Estacionamento{
         return true;
     }
 
-    public boolean removeCarro(SubCarro carro){
+    public SubCarro encontraCarro(int id) {
         Pilha<SubCarro> pilhaTemp = new Pilha<>();
-        boolean encontrouCarro = false;
+        SubCarro carroSai = null;
 
-        if(pilha.estaVazia()){
-            return false;
+        while (!pilha.estaVazia()&&carroSai==null) {
+            if (pilha.consultaTopo().getCarro()==id) {
+                carroSai = pilha.pop();
+                
+            } 
+            else {
+                pilha.consultaTopo().adicionaMan();
+                pilhaTemp.push(pilha.pop());
+            }
+
         }
-        else{
-            while(encontrouCarro != true && !pilha.estaVazia()){
-                SubCarro carroatual = (SubCarro) pilha.consultaTopo();
-                if(carro == carroatual){
-                    LocalTime entrada = carroatual.getEntrada();
-                    LocalTime saida = LocalTime.now();
-                    Duration duracao = Duration.between(saida, entrada);
-                    System.out.println("O carro " + carroatual + "  foi encontrado\n" + " a duração de estadia foi de " + duracao + "\nO número de manobras foi de" + carroatual.getManobras());
-                    pilha.pop();
-                    encontrouCarro=true;
-                    
-                }
-                else{
-                    carroatual.adicionaMan();
-                    pilhaTemp.push(carroatual);
-                    pilha.pop();
-                }
-    
-            }
-            if(encontrouCarro == true){
-               
-            }
-            else{
+        
+        guardarCarro(pilha, pilhaTemp);
+        return carroSai;
 
-            }
-            return false;
+    }
+    public void guardarCarro(Pilha<SubCarro> pilhaAtual,Pilha<SubCarro> pilhaTemp){
+        while (!pilhaTemp.estaVazia()) {
+            pilhaAtual.push(pilhaTemp.pop());
         }
+        
 
-        
-        
     }
 }
