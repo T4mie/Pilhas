@@ -1,30 +1,47 @@
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Random;
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Estacionamento e = new Estacionamento();
         Random r = new Random();
-        int i = 0;
-        e.Estaciona(10);
-        while (i <=10) {
-            if(e.estacionaCarro(new SubCarro(i,"ABC123"+ i,LocalTime.now()))){
-                System.out.println("O Carro de Placa ABC123"+i+" foi alocado" );
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Digite a capacidade maxima do Estacionamento:");
+        int capacidade = sc.nextInt();
+
+        while (capacidade !=0) {
+            int i = 1;
+            e.Estaciona(capacidade);
+            while (i <= capacidade) {
+                if (e.estacionaCarro(new SubCarro(i, "ABC123" + i, LocalTime.now()))) {
+                    System.out.println("O Carro de Placa ABC123" + i + " foi alocado\n");
+                } else {
+                    System.out.println("Estacionamento cheio, seu abobrinha");
+                }
+
+                i++;
             }
-            else{
-                System.out.println("Estacionamento cheio, seu abobrinha");
+            System.out.println("Digite o ID buscado");
+            int busca = sc.nextInt();
+            while (busca != 0) {
+                SubCarro carroProcurado = e.encontraCarro(busca);
+                if (carroProcurado == null) {
+                    System.out.println("Valor de Id nao encontrado, carro nao esta no estacionamento");
+                } else {
+                    Duration duracao = e.calcularDuration(carroProcurado);
+                    System.out.println("O carro de placa " + carroProcurado.getPlaca() + " foi entregue apos " + duracao
+                            + " e foram feitas " + carroProcurado.getManobras() + " manobras com o carro.");
+
+                }
+                System.out.println("Digite um novo ID. Digite 0 para sair:");
+                busca = sc.nextInt();
             }
-            
-            i++;
+            System.out.println("Digite uma nova capacidade maxima do Estacionamento, digite 0 para sair:");
+            capacidade = sc.nextInt();
         }
-        SubCarro carroProcurado = e.encontraCarro(0);
-        LocalTime saida = LocalTime.now();
-        Duration duracao = Duration.between(saida, carroProcurado.getEntrada());
-        System.out.println("O carro de placa " + carroProcurado.getPlaca() + " foi entregue após " + duracao + " e foram feitas "+ carroProcurado.getManobras() + " manobras com o carro.");
-        SubCarro carroProcurado2 = e.encontraCarro(r.nextInt(10));
-        LocalTime saida2 = LocalTime.now();
-        Duration duracao2 = Duration.between(saida2, carroProcurado2.getEntrada());
-        System.out.println("O carro de placa " + carroProcurado2.getPlaca() + " foi entregue após " + duracao2 + " e foram feitas "+ carroProcurado2.getManobras() + " manobras com o carro.");
-    
+         
+        sc.close();
     }
 }

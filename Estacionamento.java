@@ -1,3 +1,6 @@
+import java.time.Duration;
+import java.time.LocalTime;
+
 public class Estacionamento{
     private Pilha<SubCarro> pilha;
     private int capacidade;
@@ -42,5 +45,11 @@ public class Estacionamento{
         }
         
 
+    }
+    public Duration calcularDuration(SubCarro carroProcurado){
+        LocalTime entrada = carroProcurado.getEntrada(); 
+        LocalTime saida = LocalTime.now();
+        Duration duracao = Duration.between(saida,entrada);
+        return duracao;
     }
 }
