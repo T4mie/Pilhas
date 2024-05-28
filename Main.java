@@ -1,11 +1,9 @@
 import java.time.Duration;
 import java.time.LocalTime;
-import java.util.Random;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Estacionamento e = new Estacionamento();
-        Random r = new Random();
         Scanner sc = new Scanner(System.in);
         
         System.out.println("Digite a capacidade maxima do Estacionamento:");
