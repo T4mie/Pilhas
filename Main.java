@@ -1,12 +1,15 @@
+import java.time.LocalTime;
 public class Main {
     public static void main(String[] args) {
-        Pilha<Carro> e = new Pilha<>();
-        System.out.println(e);
+        Estacionamento e = new Estacionamento();
 
-        Carro c1 = new Carro(1, "NCJ-4796");
-        e.push(c1);
+        e.Estaciona(2);
+        SubCarro c1 = new SubCarro(0,"JYN7A26",LocalTime.now());
+        e.estacionaCarro(c1);
+        SubCarro c2 = new SubCarro(1,"RTB4C06",LocalTime.now());
+        e.estacionaCarro(c2);
 
-        Carro c2 = new Carro(2, "NCJ-4796");
-        e.push(c2);
+        e.removeCarro(c2);
+    
     }
 }
