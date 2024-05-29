@@ -6,7 +6,7 @@ public class Main {
         Estacionamento e = new Estacionamento();
         Scanner sc = new Scanner(System.in);
         
-        System.out.println("Digite a capacidade maxima do Estacionamento:");
+        System.out.println("Digite a capacidade maxima do Estacionamento, digite 0 para sair:");
         int capacidade = sc.nextInt();
 
         while (capacidade !=0) {
